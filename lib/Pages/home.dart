@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
         );
       }
 
-      return returnWid;
+      return RefreshIndicator(child: returnWid, onRefresh:(){return model.fetchProduct(indicator: false);} ) ;
     });
   }
 

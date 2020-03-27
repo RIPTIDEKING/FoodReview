@@ -25,7 +25,12 @@ class _ProductCard extends State<ProductCard> {
       return Card(
         child: Column(
           children: <Widget>[
-            Image.network(product[widget.index].image),
+            FadeInImage(
+              height: 300.0,
+              fit: BoxFit.cover,
+              image: NetworkImage(product[widget.index].image),
+              placeholder: AssetImage('assets/imageLoder.gif'),
+            ),
             Container(
               margin: EdgeInsets.only(top: 10.0),
               child: Row(

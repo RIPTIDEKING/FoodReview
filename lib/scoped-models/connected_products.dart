@@ -107,12 +107,12 @@ mixin ProductsModel on ConnectedProducts {
   void removeProduct() {
     _isLoading = true;
     final deletedProductid = selectedProduct.id;
-    _productsList.removeAt(_selectedProductIndex);     
-      deSelectIndex(); 
+    _productsList.removeAt(_selectedProductIndex);
+    deSelectIndex();
     notifyListeners();
     http
         .delete(
-            'https://fir-e-56fc6.firebaseio.com/products/${deletedProductid}.json')
+            'https://fir-e-56fc6.firebaseio.com/products/$deletedProductid.json')
         .then((http.Response responce) {
       _productsList.removeAt(_selectedProductIndex);
       deSelectIndex();
@@ -138,10 +138,10 @@ mixin ProductsModel on ConnectedProducts {
     notifyListeners();
   }
 
-  void fetchProduct() {
-    _isLoading = true;
+  Future<Null> fetchProduct({bool indicator = true}) {
+    _isLoading = indicator;
     notifyListeners();
-    http
+    return http
         .get('https://fir-e-56fc6.firebaseio.com/products.json')
         .then((http.Response responce) {
       final Map<String, dynamic> responceData = json.decode(responce.body);
